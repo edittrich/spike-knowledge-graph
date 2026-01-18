@@ -21,7 +21,7 @@ async def main():
         password=password,
         refresh_schema=False,
     )
-    graph.query("MATCH (n) DETACH DELETE n")
+    graph.query("MATCH (n)\nDETACH DELETE n")
     print(f"Connected to Neo4j and Deleted Graph\n")
 
     print(f"Defining LLM and Graph Transformer")

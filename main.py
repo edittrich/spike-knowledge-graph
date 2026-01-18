@@ -3,7 +3,6 @@ import os
 
 from dotenv import load_dotenv
 from langchain_community.document_loaders import TextLoader
-from langchain_core.documents import Document
 from langchain_experimental.graph_transformers import LLMGraphTransformer
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_neo4j import Neo4jGraph

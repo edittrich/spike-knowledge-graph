@@ -16,7 +16,7 @@ api_key = os.getenv("OPENAI_API_KEY")
 
 # llm = ChatOpenAI(temperature=0, model_name="gpt-5")
 # llm = ChatOllama(temperature=0, model="gpt-oss:20b")
-llm = ChatOllama(temperature=0, model="nemotron-3-nano")
+llm = ChatOllama(temperature=0, model="nemotron-3-nano:30b")
 
 graph_transformer = LLMGraphTransformer(llm=llm)
 
@@ -33,6 +33,8 @@ async def extract_graph_data(text):
         list: A list of GraphDocument objects containing nodes and relationships.
     """
     documents = [Document(page_content=text)]
+    print(f"Create graph with {llm}")
+
     graph_documents = await graph_transformer.aconvert_to_graph_documents(documents)
     return graph_documents
 

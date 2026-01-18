@@ -2,7 +2,7 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-from langchain_community.document_loaders import TextLoader
+from langchain_community.document_loaders import JSONLoader, TextLoader
 from langchain_experimental.graph_transformers import LLMGraphTransformer
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_neo4j import Neo4jGraph
@@ -24,6 +24,14 @@ async def main():
     graph.query("MATCH (n)\nDETACH DELETE n")
     print(f"Connected to Neo4j and Deleted Graph\n")
 
+    jsonloader = JSONLoader(
+        file_path="marie_curie_summary.json",
+        jq_schema=".",
+        text_content=False,
+        json_lines=True
+    )
+    json_documents = jsonloader.load()
+
     print(f"Defining LLM and Graph Transformer")
     # llm = ChatGoogleGenerativeAI(temperature=0, model='gemini-2.5-flash')
     # llm = ChatOpenAI(temperature=0, model='gpt-4o')
@@ -34,8 +42,8 @@ async def main():
     print(f"Defined LLM and Graph Transformer: \n{llm}\n")
 
     print(f"Loading Document")
-    loader = TextLoader("marie_curie_summary.txt")
-    documents = loader.load()
+    textloader = TextLoader("marie_curie_summary.txt")
+    documents = textloader.load()
     print(f"Loaded Document: \n{documents}\n")
 
     print(f"Creating Graph")

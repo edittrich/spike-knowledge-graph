@@ -11,12 +11,11 @@ import asyncio
 
 # Load the .env file
 load_dotenv()
-# Get API key from environment variable
-api_key = os.getenv("OPENAI_API_KEY")
 
-# llm = ChatOpenAI(temperature=0, model_name="gpt-5")
-# llm = ChatOllama(temperature=0, model="gpt-oss:20b")
+# llm = ChatOpenAI(temperature=0, model_name="gpt-4o")
+# llm = ChatGoogleGenerativeAI(temperature=0, model='gemini-2.5-flash')
 llm = ChatOllama(temperature=0, model="nemotron-3-nano:30b")
+# llm = ChatOllama(temperature=0, model="gpt-oss:20b")
 
 graph_transformer = LLMGraphTransformer(llm=llm)
 
@@ -50,15 +49,23 @@ def visualize_graph(graph_documents):
         pyvis.network.Network: The visualized network graph object.
     """
     # Create network
-    net = Network(height="1200px", width="100%", directed=True,
-                      notebook=False, bgcolor="#222222", font_color="white", filter_menu=True, cdn_resources='remote') 
+    net = Network(
+        height="1200px",
+        width="100%",
+        directed=True,
+        notebook=False,
+        bgcolor="#222222",
+        font_color="white",
+        filter_menu=True,
+        cdn_resources="remote",
+    )
 
     nodes = graph_documents[0].nodes
     relationships = graph_documents[0].relationships
 
     # Build lookup for valid nodes
     node_dict = {node.id: node for node in nodes}
-    
+
     # Filter out invalid edges and collect valid node IDs
     valid_edges = []
     valid_node_ids = set()

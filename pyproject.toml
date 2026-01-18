@@ -5,11 +5,17 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "ipykernel>=7.1.0",
+    "isort>=7.0.0",
     "langchain>=1.2.6",
     "langchain-experimental>=0.4.1",
+    "langchain-google-genai>=4.2.0",
+    "langchain-neo4j>=0.7.0",
     "langchain-ollama>=1.0.1",
     "langchain-openai>=1.1.7",
+    "neo4j>=6.1.0",
     "python-dotenv>=1.2.1",
     "pyvis>=0.3.2",
+    "ruff>=0.14.13",
     "streamlit>=1.53.0",
 ]

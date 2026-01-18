@@ -1,5 +1,6 @@
 from langchain_experimental.graph_transformers import LLMGraphTransformer
 from langchain_core.documents import Document
+from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 from pyvis.network import Network
 
@@ -13,7 +14,9 @@ load_dotenv()
 # Get API key from environment variable
 api_key = os.getenv("OPENAI_API_KEY")
 
-llm = ChatOpenAI(temperature=0, model_name="gpt-4o")
+# llm = ChatOpenAI(temperature=0, model_name="gpt-5")
+# llm = ChatOllama(temperature=0, model="gpt-oss:20b")
+llm = ChatOllama(temperature=0, model="nemotron-3-nano")
 
 graph_transformer = LLMGraphTransformer(llm=llm)
 
